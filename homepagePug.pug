@@ -1,0 +1,23 @@
+doctype html
+html
+  head
+    title #{title}
+    link(type='text/css' href='homepageStyles.css') 
+  body
+  center
+    h1 AnQ
+    div(class='search')
+      input(
+        type='text' 
+        id= 'searchValue'
+        placeholder='Search..'
+        )  
+    div(class="container")
+      div(class="vertical-center")
+        div(class="topnav" ) 
+          a.active(href="/") Home
+          a(href="/tag") Tags 
+          a(href="/Ask") Ask 
+          a(href="/Question") Questions
+    h2 #{title}
+      block content

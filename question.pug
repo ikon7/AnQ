@@ -2,7 +2,8 @@ doctype html
 html
   head
     title #{title}
-    link(type='text/css' href='homepageStyles.css') 
+    link(type='text/css' href='homepageStyles.css')
+    link(rel ='import' href='ask')
   body
   center
     h1 AnQ
@@ -19,3 +20,26 @@ html
           a(href="/tag") Tags 
           a(href="/Ask") Ask 
           a(href="/Question") Questions
+
+    div(class="question-text")
+      p(id='output') It's Empty in Here.. 
+  script.
+    let qData ;
+
+    document.getElementById('askButton').onclick = function(){
+
+    qData = document.getElementById('questionData').value;
+    console.log(qData);
+    document.getElementById('output').innerHTML = qData;
+    };
+
+  
+          window.onload = function(){
+          var questionData = document.getElementById("questionData").value;
+
+          if (questionData != null) {
+          document.getElementById('output').innerHTML = `${questionData}`;
+            } else {
+              document.getElementByID('output').innerHTML = "It's Empty in Here.."
+            }
+          };

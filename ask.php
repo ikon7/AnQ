@@ -1,25 +1,72 @@
 <?php
 include('../config/db_connect.php');
+//Currently trying to find a good spot to insert both tagid and questionid into the question_tag table. Most likely going to 
+//try inside of the tag foreach loop.
+
+
+
 //For question input form
 //Code below to put question data into database is working currently. It did not work recently for some odd reason.
+$question = filter_input(INPUT_POST, 'question');
 if(isset($_POST['question'])) {
     if(!empty($_POST['question'])) {
-        $question = filter_input(INPUT_POST, 'question');
+        // $question = filter_input(INPUT_POST, 'question');
+        
 
         $query = "INSERT INTO question_titles(question) values('$question')";
 
         $run = pg_query($conn, $query);
 
-        if($run){
-            echo " Question submmited successfully";
-        } else {
-            echo "An error occured";
-        }
+        
+
+        // if($run){
+        //     echo " Question submmited successfully";
+        // } else {
+        //     echo "An error occured";
+        // }
+
+        // $questionIdSelect = "SELECT id from question_titles WHERE question = '$question'";
+        // $questionIdResult = pg_query($conn, $questionIdSelect);
+        // $questionId = pg_fetch_all($questionIdResult, PGSQL_ASSOC);
+
+        // foreach($questionId as $bId) {
+        //   $vbId = $bId['id'];
+          
+        //   $qtId = "INSERT INTO question_tag(questionid) VALUES ('$vbId')";
+
+        //   $qtIdRun = pg_query($conn, $qtId);
+
+        //   if($qtId) {
+        //     echo "Yay";
+        //   } else {
+        //     echo "pain peko";
+        //   }
+        // }
+        // print_r($questionId);
 
     };
 } else {
     echo "Question required";
 };
+
+$questionIdSelect = "SELECT id from question_titles WHERE question = '$question'";
+$questionIdResult = pg_query($conn, $questionIdSelect);
+$questionId = pg_fetch_all($questionIdResult, PGSQL_ASSOC);
+
+foreach($questionId as $bId) {
+  $vbId = $bId['id'];
+  
+  $qtId = "INSERT INTO question_tag(questionid) VALUES ('$vbId')";
+
+  $qtIdRun = pg_query($conn, $qtId);
+
+  if($qtId) {
+    echo "Yay";
+  } else {
+    echo "pain peko";
+  }
+}
+
 
 
 
@@ -28,11 +75,6 @@ $sql = "SELECT id, title from tag_titles";
 $result = pg_query($conn, $sql);
 
 $tags = pg_fetch_all($result, PGSQL_ASSOC);
-
-//Getting Tag ID
-$tagIdFuntion = function() {
-
-}
 
 
 ?>
@@ -66,11 +108,30 @@ $tagIdFuntion = function() {
 
               <?php foreach($tags as $tag) { 
                 $tagValue = htmlspecialchars($tag['title']); 
+                $tagIdValue = $tag['id'];
+
+                //tagValue is a string?
+                //$tagIdValue is a string!
+            
+                // check it $tagValue is checked
+                if (isset($_POST["$tagValue"])) {
+                  //push $tagIdValue into the question_tag database under tag id column
+                  
+                  
+                  $tagIdQuery = "INSERT INTO question_tag(tagid) VALUES ('$tagIdValue')";
+
+                  $run = pg_query($conn, $tagIdQuery);
+                  if($run) {
+                    echo "Success";
+                  } else {
+                    echo "Error";
+                  }
+                }
                 
                 ?>
 
                 <input type="checkbox" id="<?php echo $tagValue ?>" name="<?php echo $tagValue ?>" value="<?php echo $tagValue ?>">
-                <label for="science"> <?php echo $tagValue ?> </label><br>
+                <label for="<?php echo $tagValue ?>"> <?php echo $tagValue ?> </label><br>
 
               <?php } ?>
 

@@ -1,11 +1,13 @@
-<html>
+<!-- <html>
   <head>
-    <title>[object SVGSymbolElement]</title>
+    <title> AnQ</title>
     <link type="text/css" href="homepageStyles.css"/>
+    <link type=""
   </head>
   <body></body>
   <center>
     <h1>AnQ
+    </h1>
       <div class="search">
         <input type="text" id="searchValue" placeholder="Search.."/>
       </div>
@@ -17,14 +19,21 @@
       <div class="question-form">
         <form action="./ask.php" method="POST">
           <div> 
-            <label>Question </label>
+            <h2>Question </h2>
           </div>
           <div> 
             <input type="text" id="questionData" name="question" placeholder="Type here.." autocomplete="off" required="required"/>
-            <input type="submit" value="Submit"></input>
+            <div>
+              <input type="checkbox" id="science" name="science" value="science">
+              <label for="science"> <?php $rowValue ?></label><br>
+              <input type="checkbox" id="relationship" name="relationship" value="relationship">
+              <label for="relationship"> Relationship</label><br>
+              <input type="checkbox" id="baking" name="baking" value="baking">
+              <label for="baking"> Baking</label><br>
+              <input type="submit" value="Submit"></input>
+            </div>
           </div>
         </form>
       </div>
-    </h1>
   </center>
-</html>
+</html> -->

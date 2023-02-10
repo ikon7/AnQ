@@ -1,0 +1,43 @@
+<html>
+  <head>
+    <title>[object SVGSymbolElement]</title>
+    <link type="text/css" href="homepageStyles.css"/>
+    <link rel="import" href="ask.html"/>
+  </head>
+  <body></body>
+  <center>
+    <h1>AnQ</h1>
+    <div class="search">
+      <input type="text" id="searchValue" placeholder="Search.."/>
+    </div>
+    <div class="container">
+      <div class="vertical-center">
+        <div class="topnav"> <a class="active" href="/">Home</a><a href="tag.php">Tags </a><a href="ask.php">Ask </a><a href="question.php">Questions</a></div>
+      </div>
+    </div>
+    <div class="question-text">
+      <p id="output">It's Empty in Here.. </p>
+    </div>
+  </center>
+  <script>
+    let qData ;
+    
+    document.getElementById('askButton').onclick = function(){
+    
+    qData = document.getElementById('questionData').value;
+    console.log(qData);
+    document.getElementById('output').innerHTML = qData;
+    };
+    
+    
+          window.onload = function(){
+          var questionData = document.getElementById("questionData").value;
+    
+          if (questionData != null) {
+          document.getElementById('output').innerHTML = `${questionData}`;
+            } else {
+              document.getElementByID('output').innerHTML = "It's Empty in Here.."
+            }
+          };
+  </script>
+</html>

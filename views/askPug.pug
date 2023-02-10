@@ -1,0 +1,29 @@
+doctype html
+html
+  head
+    title #{title}
+    link(type='text/css' href='homepageStyles.css') 
+  body
+  center
+    h1 AnQ
+      div(class='search')
+        input(
+          type='text' 
+          id= 'searchValue'
+          placeholder='Search..'
+          )  
+      div(class="container")
+        div(class="vertical-center")
+          div(class="topnav" ) 
+            a.active(href="/") Home
+            a(href="/tag") Tags 
+            a(href="/Ask") Ask 
+            a(href="/Question") Questions
+      div(class="question-form")
+        form(action='questionData.php' method='POST')
+          div 
+            label Question 
+          div 
+            input(type="text", id="questionData" name="question" placeholder="Type here.." autocomplete='off' required)
+            button(type='button' id='askButton') Submit 
+    
